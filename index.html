@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -96,10 +95,14 @@ function choose(array) {
     "use strict";
     return array[rand_range(array.length - 1)];
 }
-function phrase() {
-    "use strict";
-    var text = choose(subjects);
-    return text;
+function get_start() {
+    var start = choose(start_subject);
+    var start_num;
+    if (start == 'Number') {
+        start_num = choose(range(1,100));
+        start += ' ' + start_num;
+    }
+    return start;
 }
 function commentary(prev_sentence) {
     "use strict";
@@ -124,14 +127,7 @@ function commentary(prev_sentence) {
     var text = '';
     switch (sentence) {
         case 1:
-            var start = choose(start_subject);
-            text += start;
-            var start_num;
-            if (start == 'Number') {
-                start_num = choose(range(1,100));
-                text += ' ' + start_num;
-            }
-            text += ' ' + choose(throw_actions);
+            text += get_start() + ' ' + choose(throw_actions);
             if (choose(range(1,3)) == 1) {
                 text += ' ' + choose(type_description);
             } else {
@@ -152,28 +148,13 @@ function commentary(prev_sentence) {
             }
             break;
         case 2:
-            var start = choose(start_subject);
-            text += start;
-            if (start == 'Number') {
-                text += ' ' + choose(range(1,100));
-            }
-            text += ' ' + choose(cut_actions) + ' ' + choose(cut_types);
+            text += get_start() + ' ' + choose(cut_actions) + ' ' + choose(cut_types);
             break;
         case 3:
-            var start = choose(start_subject);
-            text += start;
-            if (start == 'Number') {
-                text += ' ' + choose(range(1,100));
-            }
-            text += ' ' + choose(block_actions) + ' ' + choose(names_for_disc);
+            text += get_start() + ' ' + choose(block_actions) + ' ' + choose(names_for_disc);
             break;
         case 4:
-            var start = choose(start_subject);
-            text += start;
-            if (start == 'Number') {
-                text += ' ' + choose(range(1,100));
-            }
-            text += ' ' + choose(catch_actions);
+            text += get_start() + ' ' + choose(catch_actions);
             switch (choose(range(1,4))) {
                 case 1:
                     text += ' ' + choose(names_for_disc);
@@ -191,13 +172,7 @@ function commentary(prev_sentence) {
             }
             break;
         case 5:
-            var start = choose(start_subject);
-            text += start;
-            if (start == 'Number') {
-                start_num = choose(range(1,100));
-                text += ' ' + start_num;
-            }
-            text += ' ' + choose(subject_actions);
+            text += get_start() + ' ' + choose(subject_actions);
             var end = choose(end_subject);
             text += ' ' + end;
             if (end == 'number') {
@@ -209,28 +184,13 @@ function commentary(prev_sentence) {
             } 
             break;
         case 6:
-            var start = choose(start_subject);
-            text += start;
-            if (start == 'Number') {
-                text += ' ' + choose(range(1,100));
-            }
-            text += ' ' + choose(defensive_actions) + ' ' + choose(d);
+            text += get_start() + ' ' + choose(defensive_actions) + ' ' + choose(d);
             break;
         case 7:
-            var start = choose(start_subject);
-            text += start;
-            if (start == 'Number') {
-                text += ' ' + choose(range(1,100));
-            }
-            text += ' ' + choose(end_actions);
+            text += get_start() + ' ' + choose(end_actions);
             break;
         case 7:
-            var start = choose(start_subject);
-            text += start;
-            if (start == 'Number') {
-                text += ' ' + choose(range(1,100));
-            }
-            text += ' ' + choose(call_actions) + ' ' + choose(calls);
+            text += get_start() + ' ' + choose(call_actions) + ' ' + choose(calls);
             break;
         case 8:
             var disc_name = choose(names_for_disc);
